@@ -1,0 +1,47 @@
+.App {
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.room {
+  display: flex;
+  flex-direction: column;
+  color: whitesmoke;
+}
+
+.room label {
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.room input {
+  width: 200px;
+  height: 30px;
+  border: 2px solid #096215;
+  border-radius: 6px;
+  padding-left: 5px;
+  font-size: 20px;
+  text-align: center;
+  margin: 5px;
+}
+.room button {
+  width: 210px;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  padding-left: 5px;
+  font-size: 20px;
+  text-align: center;
+  margin: 5px;
+  background-color: #096215;
+  color: white;
+  cursor: pointer;
+}
+
+.sign-out {
+  margin-top: 50px;
+}
