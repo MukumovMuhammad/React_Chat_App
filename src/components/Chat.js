@@ -16,7 +16,7 @@ export const Chat = (props) => {
 
   const [newMessage, setNewMessage] = useState("");
   const messageRef = collection(db, "messages");
-
+  const [Users, setUsers] = useState([]); 
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -26,13 +26,18 @@ export const Chat = (props) => {
       orderBy("createdAt")
     );
     onSnapshot(queryMessages, (snapshot) => {
-      let messages = [];
+      let m_messages = [];
       snapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
+        m_messages.push({ ...doc.data(), id: doc.id });
+        if (!Users.includes(doc.data().user)) {
+          setUsers({...doc.data().user});
+        }
       });
 
-      setMessages(messages);
+      setMessages(m_messages);
     });
+
+    
   }, []);
 
   const handleSubmit = async (e) => {
@@ -48,6 +53,15 @@ export const Chat = (props) => {
     setNewMessage("");
   };
   return (
+    <div className="Main-Chat">
+      <div className="Room-block">
+        <div className="Room">ROOM: #{props.room}</div>
+        <div className="users-list">
+          <h3>In Room:</h3>
+          {Users.forEach((user) => {
+          return <div> {user}</div>
+        })}</div>
+      </div>
     <div className="Chat-App">
       <div className="messages">
         {messages.map((message) => {
@@ -63,6 +77,7 @@ export const Chat = (props) => {
                 {message.user}
               </div>
               <div className="text">{message.text}</div>
+              {message.user === auth.currentUser.displayName ? <button className="delete button">delete</button>: null}
             </div>
           );
         })}
@@ -82,5 +97,7 @@ export const Chat = (props) => {
         </button>
       </form>
     </div>
+    </div>
+    
   );
 };
